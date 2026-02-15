@@ -36,7 +36,7 @@
             <div class="navbar-actions">
                 @auth
                     <span class="user-greeting">Bună, {{ Auth::user()->name }}!</span>
-                    <a href="{{ route('dashboard') }}" class="nav-link">Contul meu</a>
+                    <a href="{{ route('profile') }}" class="nav-link">Contul meu</a>
                     <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                         @csrf
                         <button type="submit" class="logout-btn">Logout</button>
@@ -61,5 +61,7 @@
 
     <!-- Livewire Scripts -->
     @livewireScripts
+        @stack('scripts')
+
 </body>
 </html>
