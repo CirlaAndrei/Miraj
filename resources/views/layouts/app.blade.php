@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Miraj') }} - E-commerce for Romanian Women</title>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+
     <!-- Vite Assets -->
     @vite(['resources/css/custom.css'])
-    
+
     <!-- Livewire Styles -->
     @livewireStyles
 </head>
@@ -22,7 +22,7 @@
     <nav class="navbar">
         <div class="navbar-container">
             <a href="/" class="navbar-logo">✨ Miraj</a>
-            
+
             <!-- Main Navigation Links -->
             <div class="navbar-menu">
                 <a href="{{ route('home') }}" class="nav-link">Acasă</a>
@@ -31,7 +31,7 @@
                 <a href="#oferte" class="nav-link">Oferte</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
-            
+
             <!-- Right Side Links (Auth + Cart) -->
             <div class="navbar-actions">
                 @auth
@@ -45,11 +45,23 @@
                     <a href="{{ route('login') }}" class="nav-link">Login</a>
                     <a href="{{ route('register') }}" class="nav-link">Register</a>
                 @endauth
-                
-                <!-- Cart Icon -->
-                <a href="#" class="cart-icon">
-                    🛒 <span class="cart-count">0</span>
-                </a>
+
+                <<!-- Cart Icon -->
+        <a href="{{ route('cart.index') }}" class="cart-icon">
+            🛒
+            @php
+                use App\Models\Cart;
+                $cartCount = 0;
+                if(Auth::check()) {
+                    $cartCount = Cart::where('user_id', Auth::id())->count();
+                } else {
+                    $cartCount = Cart::where('session_id', session('cart_session_id'))->count();
+                }
+            @endphp
+            @if($cartCount > 0)
+                <span class="cart-count">{{ $cartCount }}</span>
+            @endif
+        </a>
             </div>
         </div>
     </nav>

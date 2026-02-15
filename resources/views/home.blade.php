@@ -86,78 +86,81 @@
     </div>
 </section>
 
-    <!-- Featured Products Section -->
+        <!-- Featured Products Section -->
     <section class="products-section" id="produse">
         <div class="container">
             <h2 class="section-title">Produse Recomandate</h2>
+            <p class="section-subtitle">Cele mai populare produse ale lunii</p>
+
             <div class="products-grid">
-                <!-- Product Card 1 -->
-                <div class="product-card">
-                    <div class="product-badge">Nou</div>
-                    <img src="https://via.placeholder.com/300x300" alt="Produs" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">Rochie Elegantă</h3>
-                        <p class="product-category">Modă</p>
-                        <div class="product-price">
-                            <span class="current-price">299 RON</span>
-                            <span class="old-price">399 RON</span>
-                        </div>
-                        <div class="product-actions">
-                            <button class="btn-add-to-cart">Adaugă în coș</button>
-                            <button class="btn-wishlist">❤️</button>
-                        </div>
-                    </div>
-                </div>
+                @forelse($featuredProducts as $product)
+                    <div class="product-card">
+                        @if($product->sale_price)
+                            <div class="product-badge product-badge-sale">
+                                -{{ $product->discount_percentage }}%
+                            </div>
+                        @elseif($product->is_featured)
+                            <div class="product-badge">Recomandat</div>
+                        @endif
 
-                <!-- Product Card 2 -->
-                <div class="product-card">
-                    <img src="https://via.placeholder.com/300x300" alt="Produs" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">Colier Argint</h3>
-                        <p class="product-category">Accesorii</p>
-                        <div class="product-price">
-                            <span class="current-price">159 RON</span>
-                        </div>
-                        <div class="product-actions">
-                            <button class="btn-add-to-cart">Adaugă în coș</button>
-                            <button class="btn-wishlist">❤️</button>
-                        </div>
-                    </div>
-                </div>
+                        <img src="{{ $product->image }}" alt="{{ $product->name }}" class="product-image">
 
-                <!-- Product Card 3 -->
-                <div class="product-card">
-                    <div class="product-badge product-badge-sale">-20%</div>
-                    <img src="https://via.placeholder.com/300x300" alt="Produs" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">Set Îngrijire</h3>
-                        <p class="product-category">Îngrijire</p>
-                        <div class="product-price">
-                            <span class="current-price">199 RON</span>
-                            <span class="old-price">249 RON</span>
-                        </div>
-                        <div class="product-actions">
-                            <button class="btn-add-to-cart">Adaugă în coș</button>
-                            <button class="btn-wishlist">❤️</button>
-                        </div>
-                    </div>
-                </div>
+                        <div class="product-info">
+                            <h3 class="product-title">{{ $product->name }}</h3>
+                            <p class="product-category">{{ $product->category }}</p>
 
-                <!-- Product Card 4 -->
-                <div class="product-card">
-                    <img src="https://via.placeholder.com/300x300" alt="Produs" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">Geantă Piele</h3>
-                        <p class="product-category">Accesorii</p>
-                        <div class="product-price">
-                            <span class="current-price">459 RON</span>
-                        </div>
-                        <div class="product-actions">
-                            <button class="btn-add-to-cart">Adaugă în coș</button>
-                            <button class="btn-wishlist">❤️</button>
+                            <div class="product-price">
+                                @if($product->sale_price)
+                                    <span class="current-price">{{ number_format($product->sale_price, 0) }} RON</span>
+                                    <span class="old-price">{{ number_format($product->price, 0) }} RON</span>
+                                @else
+                                    <span class="current-price">{{ number_format($product->price, 0) }} RON</span>
+                                @endif
+                            </div>
+
+                            <div class="product-actions">
+                                <a href="{{ route('product.show', $product->slug) }}" class="btn-add-to-cart">Vezi detalii</a>
+                                <button class="btn-wishlist">❤️</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @empty
+                    <p>Nu există produse momentan.</p>
+                @endforelse
+            </div>
+        </div>
+    </section>
+
+    <!-- New Arrivals Section -->
+    <section class="products-section" style="background: #f9f9f9;">
+        <div class="container">
+            <h2 class="section-title">Noutăți</h2>
+            <p class="section-subtitle">Cele mai noi produse adăugate în colecție</p>
+
+            <div class="products-grid">
+                @forelse($newProducts as $product)
+                    <div class="product-card">
+                        <div class="product-badge">Nou</div>
+
+                        <img src="{{ $product->image }}" alt="{{ $product->name }}" class="product-image">
+
+                        <div class="product-info">
+                            <h3 class="product-title">{{ $product->name }}</h3>
+                            <p class="product-category">{{ $product->category }}</p>
+
+                            <div class="product-price">
+                                <span class="current-price">{{ number_format($product->price, 0) }} RON</span>
+                            </div>
+
+                            <div class="product-actions">
+                                <a href="{{ route('product.show', $product->slug) }}" class="btn-add-to-cart">Vezi detalii</a>
+                                <button class="btn-wishlist">❤️</button>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <p>Nu există produse noi momentan.</p>
+                @endforelse
             </div>
         </div>
     </section>

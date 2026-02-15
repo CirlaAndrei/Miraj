@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
     return view('home');
@@ -33,3 +35,13 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::resource('addresses', App\Http\Controllers\AddressController::class)->except(['show']);
 Route::post('/addresses/{address}/default', [App\Http\Controllers\AddressController::class, 'setDefault'])->name('addresses.default');
+Route::get('/', [ProductController::class, 'index'])->name('home');
+Route::get('/produs/{slug}', [ProductController::class, 'show'])->name('product.show');
+
+
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+Route::put('/cart/{cart}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/{cart}', [CartController::class, 'remove'])->name('cart.remove');
+Route::delete('/cart/clear/all', [CartController::class, 'clear'])->name('cart.clear');
