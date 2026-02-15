@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        // This MUST be paginate(), not get()
         $orders = Order::with('user')->latest()->paginate(15);
         return view('admin.orders.index', compact('orders'));
     }
@@ -38,9 +37,10 @@ class OrderController extends Controller
 
         return redirect()->route('admin.orders.index')->with('success', 'Statusul comenzii a fost actualizat!');
     }
+
     public function invoice(Order $order)
-{
-    $pdf = Pdf::loadView('pdf.invoice', compact('order'));
-    return $pdf->download('factura-' . $order->order_number . '.pdf');
-}
+    {
+        $pdf = Pdf::loadView('pdf.invoice', compact('order'));
+        return $pdf->download('factura-' . $order->order_number . '.pdf');
+    }
 }

@@ -8,7 +8,9 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CheckoutController;
-// Home Page - SINGLE definition
+use App\Http\Controllers\UserOrderController;
+
+// Home Page
 Route::get('/', [ProductController::class, 'index'])->name('home');
 
 // Auth routes
@@ -24,7 +26,7 @@ Route::get('/register', function () {
 // Product routes
 Route::get('/produs/{slug}', [ProductController::class, 'show'])->name('product.show');
 
-// Cart routes
+// Cart routes (guest accessible)
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
 Route::put('/cart/{cart}', [CartController::class, 'update'])->name('cart.update');
@@ -50,17 +52,34 @@ Route::middleware(['auth'])->group(function () {
     // Addresses
     Route::resource('addresses', AddressController::class)->except(['show']);
     Route::post('/addresses/{address}/default', [AddressController::class, 'setDefault'])->name('addresses.default');
-});
-// Admin routes
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\Admin\AdminController::class, 'dashboard'])->name('dashboard');
 
-    Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
-    Route::resource('orders', App\Http\Controllers\Admin\OrderController::class)->except(['create', 'store']);
-    Route::resource('users', App\Http\Controllers\Admin\UserController::class)->only(['index', 'edit', 'update']);
-});
-Route::middleware(['auth'])->group(function () {
+    // Checkout
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
     Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');
+
+    // User Orders - moved inside auth group
+    Route::get('/order/{order}', [UserOrderController::class, 'show'])->name('orders.show');
+    Route::get('/order/{order}/invoice', [UserOrderController::class, 'invoice'])->name('orders.invoice');
 });
+
+// Admin routes (require auth + admin)
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\Admin\AdminController::class, 'dashboard'])->name('dashboard');
+
+    // Products - full CRUD
+    Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
+
+    // Orders - except create/store (includes invoice route via resource)
+    Route::resource('orders', App\Http\Controllers\Admin\OrderController::class)->except(['create', 'store']);
+
+    // Users - with ALL methods including show
+    Route::get('/users', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('users.index');
+    Route::get('/users/{user}', [App\Http\Controllers\Admin\UserController::class, 'show'])->name('users.show');
+    Route::get('/users/{user}/edit', [App\Http\Controllers\Admin\UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('users.destroy');
+});
+Route::get('/payment/checkout/{order}', [App\Http\Controllers\StripePaymentController::class, 'checkout'])->name('stripe.checkout');
+Route::get('/payment/success', [App\Http\Controllers\StripePaymentController::class, 'success'])->name('stripe.success');
+Route::get('/payment/cancel', [App\Http\Controllers\StripePaymentController::class, 'cancel'])->name('stripe.cancel');

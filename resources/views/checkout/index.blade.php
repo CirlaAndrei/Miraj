@@ -86,22 +86,22 @@
                         </div>
                     </div>
 
-                    <!-- Payment Method -->
-                    <div class="checkout-section">
-                        <h2>3. Metoda de plată</h2>
+                   <!-- Payment Method -->
+            <div class="checkout-section">
+                <h2>3. Metoda de plată</h2>
 
-                        <div class="payment-methods">
-                            <label class="payment-option">
-                                <input type="radio" name="payment_method" value="card" checked>
-                                <span>💳 Card bancar</span>
-                            </label>
+                <div class="payment-methods">
+                    <label class="payment-option">
+                        <input type="radio" name="payment_method" value="card" checked>
+                        <span>💳 Card bancar (plăți sigure cu Stripe)</span>
+                    </label>
 
-                            <label class="payment-option">
-                                <input type="radio" name="payment_method" value="ramburs">
-                                <span>💵 Ramburs la livrare</span>
-                            </label>
-                        </div>
-                    </div>
+                    <label class="payment-option">
+                        <input type="radio" name="payment_method" value="ramburs">
+                        <span>💵 Ramburs la livrare</span>
+                    </label>
+                </div>
+            </div>
 
                     <!-- Order Notes -->
                     <div class="checkout-section">

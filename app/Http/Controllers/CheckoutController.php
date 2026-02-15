@@ -9,13 +9,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-
-class CheckoutController extends Controller
+use App\Mail\OrderConfirmation;
+use App\Mail\OrderStatusUpdated;
+use Illuminate\Support\Facades\Mail;
+class CheckoutController extends Controller  // Make sure it extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth'); // Must be logged in to checkout
-    }
 
     // Show checkout page
     public function index()
@@ -115,6 +113,20 @@ class CheckoutController extends Controller
                 // Update product stock
                 $cartItem->product->decrement('stock_quantity', $cartItem->quantity);
             }
+            // After creating the order and before clearing cart
+if ($request->payment_method === 'card') {
+    // For card payments, redirect to Stripe
+    DB::commit();
+    return redirect()->route('stripe.checkout', $order);
+} else {
+    // For cash on delivery, complete order normally
+    DB::commit();
+
+    // Send confirmation email
+    Mail::to($order->user->email)->send(new OrderConfirmation($order));
+
+    return redirect()->route('checkout.success', $order);
+}
 
             // Clear the cart
             $userId = Auth::id();
@@ -129,6 +141,8 @@ class CheckoutController extends Controller
             })->delete();
 
             DB::commit();
+           Mail::to($order->user->email)->send(new OrderConfirmation($order));
+
 
             // Redirect to success page
             return redirect()->route('checkout.success', $order);

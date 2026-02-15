@@ -140,52 +140,54 @@
         </a>
     </div>
 </div>
-                <!-- Orders -->
-                <div class="profile-section" id="orders" style="display: none;">
-                    <h2>Comenzile mele</h2>
+               <!-- Orders -->
+<div class="profile-section" id="orders" style="display: none;">
+    <h2>Comenzile mele</h2>
 
-                    <div class="orders-list">
-                        <div class="order-card">
-                            <div class="order-header">
-                                <span class="order-number">Comandă #12345</span>
-                                <span class="order-date">15 Februarie 2026</span>
-                                <span class="order-status delivered">Livrată</span>
-                            </div>
-                            <div class="order-items">
-                                <div class="order-item">
-                                    <span>Rochie elegantă</span>
-                                    <span>1 x 299 RON</span>
-                                </div>
-                                <div class="order-item">
-                                    <span>Colier argint</span>
-                                    <span>1 x 159 RON</span>
-                                </div>
-                            </div>
-                            <div class="order-total">
-                                <strong>Total: 458 RON</strong>
-                            </div>
-                            <a href="#" class="btn-link">Vezi detalii</a>
-                        </div>
+    @if($orders->isEmpty())
+        <div style="text-align: center; padding: 40px; background: #f9f9f9; border-radius: 8px;">
+            <p>Nu ai plasat încă nicio comandă.</p>
+            <a href="{{ route('home') }}" class="btn-primary" style="display: inline-block; width: auto; margin-top: 20px;">Începe cumpărăturile</a>
+        </div>
+    @else
+        <div class="orders-list">
+            @foreach($orders as $order)
+                <div class="order-card">
+                    <div class="order-header">
+                        <span class="order-number">Comandă #{{ $order->order_number }}</span>
+                        <span class="order-date">{{ $order->created_at->format('d M Y, H:i') }}</span>
+                        <span class="order-status" style="background:
+                            @if($order->status == 'pending') #fff3cd; color: #856404;
+                            @elseif($order->status == 'processing') #cce5ff; color: #004085;
+                            @elseif($order->status == 'shipped') #d1ecf1; color: #0c5460;
+                            @elseif($order->status == 'delivered') #d4edda; color: #155724;
+                            @elseif($order->status == 'cancelled') #f8d7da; color: #721c24;
+                            @endif padding: 3px 12px; border-radius: 15px;">
+                            {{ $order->status }}
+                        </span>
+                    </div>
 
-                        <div class="order-card">
-                            <div class="order-header">
-                                <span class="order-number">Comandă #12344</span>
-                                <span class="order-date">10 Februarie 2026</span>
-                                <span class="order-status processing">În procesare</span>
+                    <div class="order-items">
+                        @foreach($order->items as $item)
+                            <div class="order-item">
+                                <span>{{ $item->product_name }} x{{ $item->quantity }}</span>
+                                <span>{{ number_format($item->price * $item->quantity, 0) }} RON</span>
                             </div>
-                            <div class="order-items">
-                                <div class="order-item">
-                                    <span>Set îngrijire</span>
-                                    <span>1 x 199 RON</span>
-                                </div>
-                            </div>
-                            <div class="order-total">
-                                <strong>Total: 199 RON</strong>
-                            </div>
-                            <a href="#" class="btn-link">Vezi detalii</a>
+                        @endforeach
+                    </div>
+
+                    <div class="order-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <div class="order-total">
+                            <strong>Total: {{ number_format($order->total, 0) }} RON</strong>
+                            <span style="margin-left: 15px; color: #666;">(include transport {{ number_format($order->shipping, 0) }} RON)</span>
                         </div>
+                        <a href="{{ route('orders.show', $order) }}" class="btn-link">Vezi detalii</a>
                     </div>
                 </div>
+            @endforeach
+        </div>
+    @endif
+</div>
 
                 <!-- Wishlist -->
                 <div class="profile-section" id="wishlist" style="display: none;">
