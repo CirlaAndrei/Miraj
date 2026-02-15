@@ -11,39 +11,48 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <!-- Vite Assets -->
+    @vite(['resources/css/custom.css'])
     
     <!-- Livewire Styles -->
     @livewireStyles
 </head>
 <body>
     <!-- Navigation -->
-   <!-- In the navbar-links div, replace with: -->
-<div class="navbar-links">
-    <a href="{{ route('home') }}">Acasă</a>
-    <a href="#produse">Produse</a>
-    <a href="#categorii">Categorii</a>
-    <a href="#oferte">Oferte</a>
-    <a href="#contact">Contact</a>
-    
-    @auth
-        <span>Bună, {{ Auth::user()->name }}!</span>
-        <a href="{{ route('dashboard') }}">Contul meu</a>
-        <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-            @csrf
-            <button type="submit" class="logout-btn">Logout</button>
-        </form>
-    @else
-        <a href="{{ route('login') }}">Login</a>
-        <a href="{{ route('register') }}">Register</a>
-    @endauth
-    
-    <!-- Cart Icon -->
-    <a href="#" class="cart-icon">
-        🛒 <span class="cart-count">0</span>
-    </a>
-</div>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-logo">✨ Miraj</a>
+            
+            <!-- Main Navigation Links -->
+            <div class="navbar-menu">
+                <a href="{{ route('home') }}" class="nav-link">Acasă</a>
+                <a href="#produse" class="nav-link">Produse</a>
+                <a href="#categorii" class="nav-link">Categorii</a>
+                <a href="#oferte" class="nav-link">Oferte</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            
+            <!-- Right Side Links (Auth + Cart) -->
+            <div class="navbar-actions">
+                @auth
+                    <span class="user-greeting">Bună, {{ Auth::user()->name }}!</span>
+                    <a href="{{ route('dashboard') }}" class="nav-link">Contul meu</a>
+                    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                        @csrf
+                        <button type="submit" class="logout-btn">Logout</button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="nav-link">Login</a>
+                    <a href="{{ route('register') }}" class="nav-link">Register</a>
+                @endauth
+                
+                <!-- Cart Icon -->
+                <a href="#" class="cart-icon">
+                    🛒 <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
 
     <!-- Page Content -->
     <main>
