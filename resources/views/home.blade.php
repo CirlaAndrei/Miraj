@@ -44,46 +44,47 @@
         </div>
     </section>
 
-    <!-- Categories Section -->
-    <section class="categories-section">
-        <div class="container">
-            <h2 class="section-title">Categorii Populare</h2>
-            <div class="categories-grid">
-                <a href="#" class="category-card">
-                    <div class="category-image" style="background-image: url('https://via.placeholder.com/400x300');">
-                        <div class="category-overlay">
-                            <h3>Modă</h3>
-                            <span>Explorează →</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="category-card">
-                    <div class="category-image" style="background-image: url('https://via.placeholder.com/400x300');">
-                        <div class="category-overlay">
-                            <h3>Accesorii</h3>
-                            <span>Explorează →</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="category-card">
-                    <div class="category-image" style="background-image: url('https://via.placeholder.com/400x300');">
-                        <div class="category-overlay">
-                            <h3>Îngrijire</h3>
-                            <span>Explorează →</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="category-card">
-                    <div class="category-image" style="background-image: url('https://via.placeholder.com/400x300');">
-                        <div class="category-overlay">
-                            <h3>Cadouri</h3>
-                            <span>Explorează →</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
+   <!-- Categories Section -->
+<section class="categories-section" id="categorii">
+    <div class="container">
+        <h2 class="section-title">Categorii Populare</h2>
+        <p class="section-subtitle">Descoperă produsele noastre pe categorii</p>
+        <div class="categories-grid">
+            <a href="#" class="category-card">
+                <div class="category-image" style="background-image: url('https://via.placeholder.com/400x300');"></div>
+                <div class="category-content">
+                    <h3>Modă</h3>
+                    <p>Rochie, fuste, bluze și accesorii</p>
+                    <span class="category-link">Explorează →</span>
+                </div>
+            </a>
+            <a href="#" class="category-card">
+                <div class="category-image" style="background-image: url('https://via.placeholder.com/400x300');"></div>
+                <div class="category-content">
+                    <h3>Accesorii</h3>
+                    <p>Bijuterii, genți, curele și eșarfe</p>
+                    <span class="category-link">Explorează →</span>
+                </div>
+            </a>
+            <a href="#" class="category-card">
+                <div class="category-image" style="background-image: url('https://via.placeholder.com/400x300');"></div>
+                <div class="category-content">
+                    <h3>Îngrijire</h3>
+                    <p>Produse cosmetice și parfumuri</p>
+                    <span class="category-link">Explorează →</span>
+                </div>
+            </a>
+            <a href="#" class="category-card">
+                <div class="category-image" style="background-image: url('https://via.placeholder.com/400x300');"></div>
+                <div class="category-content">
+                    <h3>Cadouri</h3>
+                    <p>Seturi cadou pentru orice ocazie</p>
+                    <span class="category-link">Explorează →</span>
+                </div>
+            </a>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Featured Products Section -->
     <section class="products-section" id="produse">

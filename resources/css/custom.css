@@ -279,7 +279,7 @@ section {
     line-height: 1.6;
 }
 
-/* Categories Section - Gradient */
+/* Categories Section - Gradient Background with White Boxes */
 .categories-section {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
@@ -308,54 +308,109 @@ section {
     display: block;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
     position: relative;
-    border: 2px solid rgba(255,255,255,0.3);
+    background: white;  /* White background for the card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
 }
 
 .category-image {
-    height: 300px;
+    height: 250px;  /* Slightly smaller to show more white */
     background-size: cover;
     background-position: center;
     position: relative;
 }
 
-.category-overlay {
+/* Remove the overlay - we'll style the text directly on white */
+.category-content {
+    padding: 25px 20px;
+    text-align: center;
+    background: white;
+}
+
+.category-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #764ba2;  /* Purple text */
+    font-weight: 600;
+}
+
+.category-content p {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.category-link {
+    display: inline-block;
+    color: #667eea;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 3px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.category-link:hover {
+    color: #764ba2;
+    border-bottom-color: #764ba2;
+}
+
+/* Alternative: If you want to keep the image with overlay but white box below */
+.category-card-alt {
+    text-decoration: none;
+    display: block;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    position: relative;
+    background: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card-alt:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+}
+
+.category-image-alt {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.category-image-alt .overlay {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    opacity: 1;
-    transition: all 0.3s ease;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
 }
 
-.category-card:hover .category-overlay {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 1) 0%, rgba(118, 75, 162, 1) 100%);
-    transform: scale(1.02);
+.category-content-alt {
+    padding: 20px;
+    text-align: center;
 }
 
-.category-overlay h3 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+.category-content-alt h3 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    color: #764ba2;
     font-weight: 600;
 }
 
-.category-overlay span {
-    font-size: 1.1rem;
-    border-bottom: 2px solid white;
-    padding-bottom: 5px;
+.category-content-alt span {
+    color: #667eea;
     font-weight: 500;
 }
-
 /* Products Section - White */
 .products-section {
     background: #ffffff;
