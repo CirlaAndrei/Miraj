@@ -45,37 +45,54 @@
     </section>
 
    <!-- Categories Section -->
+<!-- Categories Section -->
 <section class="categories-section" id="categorii">
     <div class="container">
         <h2 class="section-title">Categorii Populare</h2>
         <p class="section-subtitle">Descoperă produsele noastre pe categorii</p>
+
         <div class="categories-grid">
+            <!-- Moda Category -->
             <a href="#" class="category-card">
-                <div class="category-image" style="background-image: url('https://via.placeholder.com/400x300');"></div>
+                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=600&auto=format');">
+                    <div class="category-overlay"></div>
+                </div>
                 <div class="category-content">
                     <h3>Modă</h3>
                     <p>Rochie, fuste, bluze și accesorii</p>
                     <span class="category-link">Explorează →</span>
                 </div>
             </a>
+
+            <!-- Accesorii Category -->
             <a href="#" class="category-card">
-                <div class="category-image" style="background-image: url('https://via.placeholder.com/400x300');"></div>
+                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&auto=format');">
+                    <div class="category-overlay"></div>
+                </div>
                 <div class="category-content">
                     <h3>Accesorii</h3>
                     <p>Bijuterii, genți, curele și eșarfe</p>
                     <span class="category-link">Explorează →</span>
                 </div>
             </a>
+
+            <!-- Ingrijire Category -->
             <a href="#" class="category-card">
-                <div class="category-image" style="background-image: url('https://via.placeholder.com/400x300');"></div>
+                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?w=600&auto=format');">
+                    <div class="category-overlay"></div>
+                </div>
                 <div class="category-content">
                     <h3>Îngrijire</h3>
                     <p>Produse cosmetice și parfumuri</p>
                     <span class="category-link">Explorează →</span>
                 </div>
             </a>
+
+            <!-- Cadouri Category -->
             <a href="#" class="category-card">
-                <div class="category-image" style="background-image: url('https://via.placeholder.com/400x300');"></div>
+                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=600&auto=format');">
+                    <div class="category-overlay"></div>
+                </div>
                 <div class="category-content">
                     <h3>Cadouri</h3>
                     <p>Seturi cadou pentru orice ocazie</p>

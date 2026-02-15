@@ -29,7 +29,7 @@
                 <a href="#produse" class="nav-link">Produse</a>
                 <a href="#categorii" class="nav-link">Categorii</a>
                 <a href="#oferte" class="nav-link">Oferte</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="{{ route('contact') }}" class="nav-link">Contact</a>
             </div>
 
             <!-- Right Side Links (Auth + Cart) -->
