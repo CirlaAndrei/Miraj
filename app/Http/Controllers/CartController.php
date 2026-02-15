@@ -139,10 +139,4 @@ class CartController extends Controller
         }
         return $cart->session_id === $sessionId;
     }
-
-    // Get cart count for navbar
-    public function getCount()
-    {
-        return $this->getCartItems()->count();
-    }
 }
