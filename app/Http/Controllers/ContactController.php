@@ -35,7 +35,7 @@ class ContactController extends Controller
         try {
             // Send email to YOU (the store owner)
             Mail::send('emails.contact', ['data' => $data], function ($message) use ($request) {
-                $message->to('your.email@gmail.com') // CHANGE THIS TO YOUR EMAIL
+                $message->to('cirlaandrei@gmail.com')
                         ->subject('Mesaj nou de la ' . $request->name . ' - Miraj')
                         ->replyTo($request->email, $request->name)
                         ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));

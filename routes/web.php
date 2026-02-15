@@ -7,7 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AddressController;
-
+use App\Http\Controllers\CheckoutController;
 // Home Page - SINGLE definition
 Route::get('/', [ProductController::class, 'index'])->name('home');
 
@@ -50,4 +50,17 @@ Route::middleware(['auth'])->group(function () {
     // Addresses
     Route::resource('addresses', AddressController::class)->except(['show']);
     Route::post('/addresses/{address}/default', [AddressController::class, 'setDefault'])->name('addresses.default');
+});
+// Admin routes
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\Admin\AdminController::class, 'dashboard'])->name('dashboard');
+
+    Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
+    Route::resource('orders', App\Http\Controllers\Admin\OrderController::class)->except(['create', 'store']);
+    Route::resource('users', App\Http\Controllers\Admin\UserController::class)->only(['index', 'edit', 'update']);
+});
+Route::middleware(['auth'])->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');
 });

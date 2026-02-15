@@ -80,7 +80,8 @@
                         <span>{{ number_format($subtotal, 0) }} RON</span>
                     </div>
 
-                    <a href="#" class="btn-primary btn-checkout">Finalizează comanda</a>
+                    <a href="{{ route('checkout.index') }}" class="btn-primary btn-checkout">Finalizează comanda</a>
+
 
                     <a href="{{ route('home') }}" class="btn-continue">Continuă cumpărăturile</a>
                 </div>
