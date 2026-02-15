@@ -19,23 +19,31 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <a href="/" class="navbar-logo">✨ Miraj</a>
-            <div class="navbar-links">
-                @auth
-                    <span>Bună, {{ Auth::user()->name }}!</span>
-                    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-                        @csrf
-                        <button type="submit" class="logout-btn">Logout</button>
-                    </form>
-                @else
-                    <a href="{{ route('login') }}">Login</a>
-                    <a href="{{ route('register') }}">Register</a>
-                @endauth
-            </div>
-        </div>
-    </nav>
+   <!-- In the navbar-links div, replace with: -->
+<div class="navbar-links">
+    <a href="{{ route('home') }}">Acasă</a>
+    <a href="#produse">Produse</a>
+    <a href="#categorii">Categorii</a>
+    <a href="#oferte">Oferte</a>
+    <a href="#contact">Contact</a>
+    
+    @auth
+        <span>Bună, {{ Auth::user()->name }}!</span>
+        <a href="{{ route('dashboard') }}">Contul meu</a>
+        <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+            @csrf
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    @else
+        <a href="{{ route('login') }}">Login</a>
+        <a href="{{ route('register') }}">Register</a>
+    @endauth
+    
+    <!-- Cart Icon -->
+    <a href="#" class="cart-icon">
+        🛒 <span class="cart-count">0</span>
+    </a>
+</div>
 
     <!-- Page Content -->
     <main>
